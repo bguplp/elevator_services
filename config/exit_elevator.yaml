@@ -1,0 +1,22 @@
+maps:
+    first_floor: "/home/armadillo/catkin_ws/src/elevator_services/map/simulation_map_first_floor1.yaml"
+    second_floor: "/home/armadillo/catkin_ws/src/elevator_services/map/simulation_map_elevator.yaml"
+poses:
+    first_floor:
+        inside_elevator: # initial_pose. same as - /elevator_entrance.yaml poses: first_floor: inside_elevator_second_try:
+            x: -0.15
+            y: 3.3
+            Y: 0
+        outside_elevator: 
+            x: -0.433
+            y: 0.714
+            Y: -1.57
+    second_floor:
+        inside_elevator: # initial_pose. same as - /elevator_entrance.yaml poses: second_floor: inside_elevator_second_try:
+            x: 6.6
+            y: 6.4
+            Y: 0
+        outside_elevator:
+            x: 6.625
+            y: 3.441
+            Y: -1.57

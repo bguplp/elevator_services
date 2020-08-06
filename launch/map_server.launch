@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+
+	<arg name="map" default="map.yaml" doc="pre-saved map path"/>
+	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map)" />
+
+</launch>

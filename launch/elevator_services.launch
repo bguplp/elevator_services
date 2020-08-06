@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+	<node name="elevator_entrance" pkg="elevator_services" type="elevator_entrance.py" output="screen">
+	    <rosparam file="$(find elevator_services)/config/elevator_entrance.yaml" command="load"/>
+	</node>
+	
+	<node name="exit_elevator" pkg="elevator_services" type="exit_elevator.py" output="screen">
+	    <rosparam file="$(find elevator_services)/config/exit_elevator.yaml" command="load"/>
+	</node>
+	
+	<node name="switch_map_service" pkg="elevator_services" type="switch_map_service.py" output="screen"/>
+</launch>
