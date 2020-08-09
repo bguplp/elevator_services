@@ -189,8 +189,9 @@ def first_floor_func():
         try_2 = False
         
     # start
-    node_process = Popen(shlex.split('rosrun elevator_services inside_elevator.py'))
-    rospy.logwarn("node \"/inside_elevator\" is running")
+    if rospy.get_param("elevator_entrance/gazebo"):
+        node_process = Popen(shlex.split('rosrun elevator_services inside_elevator.py'))
+        rospy.logwarn("node \"/inside_elevator\" is running")
     rospy.loginfo("you can call exit elevator service now!!")
     if try_1 is True or try_2 is True:
         return True, True
@@ -359,8 +360,9 @@ def second_floor_func():
         try_2 = False
         
     # start
-    node_process = Popen(shlex.split('rosrun elevator_services inside_elevator.py'))
-    rospy.logwarn("node \"/inside_elevator\" is running")
+    if rospy.get_param("elevator_entrance/gazebo"):
+        node_process = Popen(shlex.split('rosrun elevator_services inside_elevator.py'))
+        rospy.logwarn("node \"/inside_elevator\" is running")
     rospy.loginfo("you can call exit elevator service now!!")
     if try_1 is True or try_2 is True:
         return True, True

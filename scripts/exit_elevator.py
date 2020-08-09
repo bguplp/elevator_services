@@ -110,7 +110,8 @@ def first_floor_func():
         error[~np.isfinite(error)] = 0
         error_max = np.sort(error)[num]
 
-        rospy.logwarn("node \"/inside_elevator\" is alive")                
+        if rospy.get_param("exit_elevator/gazebo"):
+            rospy.logwarn("node \"/inside_elevator\" is alive")                
 
         #rospy.loginfo("error_max["+str(num)+"]: "+ str(error_max))
         rospy.sleep(0.5)
@@ -119,12 +120,13 @@ def first_floor_func():
         #     error_max = 0
         #     rospy.sleep(1)
 
-    success, fail = rosnode.kill_nodes([node_name.data])
-    rospy.loginfo("success = "+ str(success)+ "fail = "+ str(fail))
-    if fail != []:
-        rospy.logerr("node \"/inside_elevator\" is still alive!!")
-    elif success != []:
-        rospy.loginfo("node \"/inside_elevator\" died!!")
+    if rospy.get_param("exit_elevator/gazebo"):
+        success, fail = rosnode.kill_nodes([node_name.data])
+        rospy.loginfo("success = "+ str(success)+ "fail = "+ str(fail))
+        if fail != []:
+            rospy.logerr("node \"/inside_elevator\" is still alive!!")
+        elif success != []:
+            rospy.loginfo("node \"/inside_elevator\" died!!")
 
     rospy.loginfo("error_max["+str(num)+"]: "+ str(error_max))
     input_pose = PoseStamped()
@@ -256,7 +258,8 @@ def second_floor_func():
         error[~np.isfinite(error)] = 0
         error_max = np.sort(error)[num]
 
-        rospy.logwarn("node \"/inside_elevator\" is alive")                
+        if rospy.get_param("exit_elevator/gazebo"):
+            rospy.logwarn("node \"/inside_elevator\" is alive")                
 
         #rospy.loginfo("error_max["+str(num)+"]: "+ str(error_max))
         rospy.sleep(0.5)
@@ -265,12 +268,13 @@ def second_floor_func():
         #     error_max = 0
         #     rospy.sleep(1)
 
-    success, fail = rosnode.kill_nodes([node_name.data])
-    rospy.loginfo("success = "+ str(success)+ "fail = "+ str(fail))
-    if fail != []:
-        rospy.logerr("node \"/inside_elevator\" is still alive!!")
-    elif success != []:
-        rospy.loginfo("node \"/inside_elevator\" died!!")
+    if rospy.get_param("exit_elevator/gazebo"):
+        success, fail = rosnode.kill_nodes([node_name.data])
+        rospy.loginfo("success = "+ str(success)+ "fail = "+ str(fail))
+        if fail != []:
+            rospy.logerr("node \"/inside_elevator\" is still alive!!")
+        elif success != []:
+            rospy.loginfo("node \"/inside_elevator\" died!!")
 
     rospy.loginfo("error_max["+str(num)+"]: "+ str(error_max))
     input_pose = PoseStamped()
@@ -342,8 +346,9 @@ def exit_elevator_func(req):
 
 rospy.init_node('exit_elevator', anonymous=True)
 rospy.Service("/exit_elevator", exit_elevator, exit_elevator_func)
-node_name = String()
-node_name = rospy.wait_for_message("/inside_elevator_node_name", String)
+if rospy.get_param("exit_elevator/gazebo"):
+    node_name = String()
+    node_name = rospy.wait_for_message("/inside_elevator_node_name", String)
 rospy.loginfo("exit elevator service is waiting for request...")
 
 rospy.spin()
