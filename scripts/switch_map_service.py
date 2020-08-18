@@ -19,8 +19,8 @@ def kill_node(taype_name="/map_server"):
         rospy.logwarn("something went wrong, with killing the node: "+taype_name)
         return False
 
-def run_node(taype_name="map_server", pkg_name="map_server", arg=[]):
-    node_process = Popen(shlex.split('rosrun '+pkg_name+' '+taype_name+' '+arg))   # arg=req.map_name
+def run_node(taype_name="map_server", pkg_name="map_server", arg=""):
+    node_process = Popen(shlex.split('rosrun '+pkg_name+' '+taype_name+' '+str(arg)))   # arg=req.map_name
     rospy.loginfo("new node ["+taype_name+"] have been launched!") 
     rospy.sleep(2)
     return True
