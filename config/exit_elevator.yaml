@@ -1,16 +1,16 @@
 maps:
-    first_floor: "/home/tal/catkin_ws/src/elevator_services/map/simulation_map_first_floor1.yaml"
+    first_floor: "/home/tal/catkin_ws/src/elevator_services/map/sim_first_floor_new.yaml"
     second_floor: "/home/tal/catkin_ws/src/elevator_services/map/simulation_map_second_floor2.yaml"
 poses:
     first_floor:
         inside_elevator: # initial_pose. same as - /elevator_entrance.yaml poses: first_floor: inside_elevator_second_try:
-            x: -0.15
-            y: 3.3
+            x: -8.924
+            y: 0.152
             Y: 0
         outside_elevator: 
-            x: -0.433
-            y: 0.714
-            Y: -1.57
+            x: -6.466
+            y: 0.15
+            Y: 0
     second_floor:
         inside_elevator: # initial_pose. same as - /elevator_entrance.yaml poses: second_floor: inside_elevator_second_try:
             x: 5.657
