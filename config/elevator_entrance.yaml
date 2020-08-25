@@ -5,12 +5,12 @@ poses:
             y: 1.254
             Y: -2.764
         inside_elevator_first_try:
-            x: -8.926
+            x: -8.724
             y: 0.150
             Y: 1.57
         inside_elevator_second_try: # same as - /exit_elevator.yaml poses: first_floor: inside_elevator:
-            x: -8.924
-            y: 0.152
+            x: -8.65 #-8.924
+            y: 0.12 # 0.152
             Y: 0
     second_floor:
         outside_elevator: # initial_pose

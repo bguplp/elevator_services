@@ -45,7 +45,7 @@ def first_floor_func():
                                 0.0, 0.0, 0.25, 0.0, 0.0, 0.0, 
                                 0.0, 0.0, 0.0, 0.25, 0.0, 0.0, 
                                 0.0, 0.0, 0.0, 0.0, 0.25, 0.0, 
-                                0.0, 0.0, 0.0, 0.0, 0.0, 0.25]
+                                0.0, 0.0, 0.0, 0.0, 0.0, 0.25] #0.25
     initialpose.publish(init_pose)
 
     rospy.Subscriber('/scan', LaserScan, get_scan)
@@ -194,7 +194,7 @@ def second_floor_func():
                                 0.0, 0.0, 0.25, 0.0, 0.0, 0.0, 
                                 0.0, 0.0, 0.0, 0.25, 0.0, 0.0, 
                                 0.0, 0.0, 0.0, 0.0, 0.25, 0.0, 
-                                0.0, 0.0, 0.0, 0.0, 0.0, 0.25]
+                                0.0, 0.0, 0.0, 0.0, 0.0, 0.25] #0.25
     initialpose.publish(init_pose)
 
     rospy.Subscriber('/scan', LaserScan, get_scan)
