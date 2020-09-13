@@ -3,12 +3,12 @@
 	<arg name="gazebo_elevator" default="false" doc="gives approval to use inside_elevator service. this service is for simulation purposes only!"/>
 
 	<node name="elevator_entrance" pkg="elevator_services" type="elevator_entrance.py" output="screen">
-	    <rosparam file="$(find elevator_services)/config/elevator_entrance.yaml" command="load"/>
+	    <rosparam file="$(find elevator_services)/config/elevator_entrance_real_robot.yaml" command="load"/>
 		<param name="gazebo" value="$(arg gazebo_elevator)"/>
 	</node>
 	
 	<node name="exit_elevator" pkg="elevator_services" type="exit_elevator.py" output="screen">
-	    <rosparam file="$(find elevator_services)/config/exit_elevator.yaml" command="load"/>
+	    <rosparam file="$(find elevator_services)/config/exit_elevator_real_robot.yaml" command="load"/>
 		<param name="gazebo" value="$(arg gazebo_elevator)"/>
 	</node>
 	
