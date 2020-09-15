@@ -1,27 +1,27 @@
 poses:
     first_floor:
         outside_elevator: # initial_pose
-            x: 3.241
-            y: -3.927
-            Y: -3.927
+            x: -21.711
+            y: -0.941
+            Y: -0.972
         inside_elevator_first_try:
-            x: 1.673
-            y: -1.403
-            Y: 2.911
+            x: -20.917
+            y: -3.368
+            Y: -1.591
         inside_elevator_second_try: # same as - /exit_elevator.yaml poses: first_floor: inside_elevator:
-            x: 2.955
-            y: -1.958
-            Y: -1.124
+            x: -20.875
+            y: -3.155
+            Y: 2.749
     second_floor:
         outside_elevator: # initial_pose
-            x: 3.241
-            y: -3.927
-            Y: -3.927
+            x: -21.711
+            y: -0.941
+            Y: -0.972
         inside_elevator_first_try:
-            x: 1.673
-            y: -1.403
-            Y: 2.911
+            x: -20.917
+            y: -3.368
+            Y: -1.591
         inside_elevator_second_try: # same as - /exit_elevator.yaml poses: second_floor: inside_elevator:
-            x: 2.955
-            y: -1.958
-            Y: -1.124
+            x: -20.875
+            y: -3.155
+            Y: 2.749
