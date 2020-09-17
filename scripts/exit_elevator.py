@@ -17,6 +17,30 @@ from elevator_services.srv import switch_map, switch_mapResponse
 global z, error_max, num, node_name
 num = -10
 
+def init_pose_check(x, y):
+    init_pose_pub = rospy.Publisher("initialpose",PoseWithCovarianceStamped, queue_size=2)
+    amcl = rospy.wait_for_message("amcl_pose", PoseWithCovarianceStamped)
+    pose = amcl.pose.pose.position
+    R = np.sqrt((pose.x - x)**2 + (pose.y - y)**2)
+    rospy.loginfo("distance from init pose \"R\": "+ str(R))
+
+    if R > 2:
+        init_pose = PoseWithCovarianceStamped()
+        init_pose.header.frame_id = "map"
+        init_pose.header.stamp = rospy.Time.now()
+        init_pose.pose.pose.position.x = rospy.get_param("exit_elevator/poses/first_floor/inside_elevator/x")
+        init_pose.pose.pose.position.y = rospy.get_param("exit_elevator/poses/first_floor/inside_elevator/y")
+        init_pose.pose.pose.position.z = 0
+        init_pose.pose.pose.orientation = Quaternion(*tf.transformations.quaternion_from_euler(0,0,rospy.get_param("exit_elevator/poses/first_floor/inside_elevator/Y")))
+        init_pose.pose.covariance =[0.25, 0.0, 0.0, 0.0, 0.0, 0.0, 
+                                    0.0, 0.25, 0.0, 0.0, 0.0, 0.0, 
+                                    0.0, 0.0, 0.25, 0.0, 0.0, 0.0, 
+                                    0.0, 0.0, 0.0, 0.25, 0.0, 0.0, 
+                                    0.0, 0.0, 0.0, 0.0, 0.25, 0.0, 
+                                    0.0, 0.0, 0.0, 0.0, 0.0, 0.25] #0.25
+        for ii in xrange(3):
+            init_pose_pub.publish(init_pose) 
+
 def get_scan(msg):
     global z
     z = np.array(msg.ranges)     
@@ -127,6 +151,8 @@ def first_floor_func():
             rospy.logerr("node \"/inside_elevator\" is still alive!!")
         elif success != []:
             rospy.loginfo("node \"/inside_elevator\" died!!")
+    else:
+        rospy.sleep(1)
 
     rospy.loginfo("error_max["+str(num)+"]: "+ str(error_max))
     input_pose = PoseStamped()
@@ -162,7 +188,12 @@ def first_floor_func():
     goal.target_pose = input_pose
 
     rospy.loginfo("Sending goal location ...")
-    ac.send_goal(goal)	
+    ac.send_goal(goal)
+
+    start_time = rospy.Time.now().secs
+    while (rospy.Time.now().secs - start_time) < 5:
+        init_pose_check(rospy.get_param("exit_elevator/poses/first_floor/inside_elevator/x"), rospy.get_param("exit_elevator/poses/first_floor/inside_elevator/y"))
+	
     ac.wait_for_result(rospy.Duration(60))
 
     if(ac.get_state() ==  GoalStatus.SUCCEEDED):
@@ -275,6 +306,8 @@ def second_floor_func():
             rospy.logerr("node \"/inside_elevator\" is still alive!!")
         elif success != []:
             rospy.loginfo("node \"/inside_elevator\" died!!")
+    else:
+        rospy.sleep(1)
 
     rospy.loginfo("error_max["+str(num)+"]: "+ str(error_max))
     input_pose = PoseStamped()
@@ -310,7 +343,12 @@ def second_floor_func():
     goal.target_pose = input_pose
 
     rospy.loginfo("Sending goal location ...")
-    ac.send_goal(goal)	
+    ac.send_goal(goal)
+
+    start_time = rospy.Time.now().secs
+    while (rospy.Time.now().secs - start_time) < 5:
+        init_pose_check(rospy.get_param("exit_elevator/poses/first_floor/inside_elevator/x"), rospy.get_param("exit_elevator/poses/first_floor/inside_elevator/y"))
+	
     ac.wait_for_result(rospy.Duration(60))
 
     if(ac.get_state() ==  GoalStatus.SUCCEEDED):
